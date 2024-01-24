@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import StackNavigation from './StackNavigation'
 import Category from '../container/Category';
 import Counter from '../container/Counter';
+import SubCategory from '../container/SubCategory';
 export default function DrawerNavigation() {
     const Drawer = createDrawerNavigator();
 
@@ -11,6 +12,7 @@ export default function DrawerNavigation() {
     <Drawer.Navigator>
         <Drawer.Screen name='Counter' component={Counter} />
         <Drawer.Screen name='Category' component={Category} />
+        <Drawer.Screen name='SubCategory' component={SubCategory} />
     </Drawer.Navigator>
   )
 }
