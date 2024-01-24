@@ -2,12 +2,15 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import StackNavigation from './StackNavigation'
+import Category from '../container/Category';
+import Counter from '../container/Counter';
 export default function DrawerNavigation() {
     const Drawer = createDrawerNavigator();
 
   return (
     <Drawer.Navigator>
-        <Drawer.Screen name='Counter' component={StackNavigation} />
+        <Drawer.Screen name='Counter' component={Counter} />
+        <Drawer.Screen name='Category' component={Category} />
     </Drawer.Navigator>
   )
 }
