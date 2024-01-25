@@ -53,11 +53,12 @@ function category() {
       image: ''
     },
     validationSchema: categorySchema,
-    onSubmit: values => {
+    onSubmit: (values ,{resetForm}) => {
       // console.log(values, "valuesssssss");
 
       toggleModal(false);
       dispatch(addCategoryData(values))
+      resetForm();
     },
   });
 

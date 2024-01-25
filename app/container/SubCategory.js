@@ -41,20 +41,21 @@ export default function SubCategory() {
             subCatName:'',
         },
         validationSchema:subCatSchema,
-        onSubmit:values => {
-            console.log(values);
-
-            dispatch(addSubCatData(values))
+        onSubmit:(values,{resetForm}) => {
+            // resetForm();
+            console.log(values,"valuessssssssssssssssssss");
+            dispatch(addSubCatData(values));
+            
         }
     })
 
-    const {handleBlur, handleChange, handleSubmit, setFieldValue, touched, errors, values} = formik
+    const {handleBlur, handleChange, handleSubmit, setFieldValue, touched, errors, values,} = formik
     console.log(values);
 
     return (
         <View>
             <Picker
-                style={{ borderWidth: 3 }}
+            
                 name="category"
                 selectedValue={subCategory}
                 onValueChange={(itemValue, itemIndex) => {
@@ -72,6 +73,7 @@ export default function SubCategory() {
             {touched.category && errors.category ? <Text>{errors.category}</Text> : null}
 
             <TextInput
+                // value={values.subCatName}
                 name='subCatName'
                 onChangeText={handleChange('subCatName')}
                 onBlur={handleBlur('subCatName')}
@@ -87,8 +89,8 @@ export default function SubCategory() {
             {
                 subCatSel.subCatData.map((v,i)=>{
                     return (
-                        <View key={i}>
-                        <Text>{v.subCatName}</Text>
+                        <View key={v.id}>
+                        <Text style={{marginTop:20}}>{v.subCatName}</Text>
                         <TouchableOpacity onPress={()=>handleDelete(v)}>
                             <Text>DELETE</Text>
                         </TouchableOpacity>

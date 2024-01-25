@@ -40,17 +40,17 @@ export const addCategoryData = createAsyncThunk(
     'category/add',
 
     async (data) => {
-        // console.log("addddddddddddddddd", data);
+        console.log("addddddddddddddddd", data);
         let allData = { ...data }
 
         let tempArr = data.image.path.split('/')
         let imageName = tempArr[tempArr.length - 1]
-        // console.log(imageName);
+        console.log(imageName);
 
         let rNo = Math.floor(Math.random() * 1000);
 
         let imgFinalName = rNo + "_" + imageName;
-        // console.log(imgFinalName);
+        console.log(imgFinalName);
 
         const imgRef = storage().ref('category/' + imgFinalName);
 
@@ -75,7 +75,8 @@ export const addCategoryData = createAsyncThunk(
                 .catch((error) => console.log(error));
         });
 
-        // console.log("aallllll datttaaaaaaaaaa", allData);
+        console.log("aallllll datttaaaaaaaaaa", allData);
+        console.log(allData.id,"iiiiiiiiiiiiiiiiddddddddddddddddddddd");
         return allData;
 
     }
@@ -85,10 +86,10 @@ export const deleteCategoryData = createAsyncThunk(
 
     async (data) => {
         console.log("sliceeeeeeeeeeeeeeeeeee", data);
-        const imgRef = storage().ref('category/' + data.imgFinalName);
+        const imgRef = storage().ref('category/' + data.imagename);
         console.log(imgRef);
 
-        imgRef.delete().then(async () => {
+        await imgRef.delete().then(async () => {
             await firestore()
                 .collection('category')
                 .doc(data.id)
@@ -128,7 +129,7 @@ const categorySlice = createSlice({
 
         // builder.addCase(addCategoryData.pending,handleLoading)
         builder.addCase(addCategoryData.fulfilled, (state, action) => {
-            // console.log("actionnnnnnnnnnnnnnnnnn", action);
+            console.log("actionnnnnnnnnnnnnnnnnn", action.payload);
             state.category.push(action.payload)
             state.isLoading = false
             state.error = null

@@ -40,9 +40,12 @@ export const addSubCatData = createAsyncThunk(
         await firestore()
             .collection('subCategory')
             .add(data)
-            .then(() => {
+            .then((doc) => {
                 console.log('User added!');
+                data.id=doc.id;
+                
             });
+            console.log("return dataaaaaaaaaaa",data);
         return data;
     }
 )
@@ -77,7 +80,7 @@ const subCategorySlice = createSlice({
             state.subCatData.push(action.payload)
         })
         builder.addCase(deleteSubCatData.fulfilled,(state,action)=>{
-           state.subCatData = state.subCatData.filter((v)=>v.id !== action.payload)
+           state.subCatData = state.subCatData.filter((v)=> v.id !== action.payload)
         })
     }
 })
